@@ -1,0 +1,70 @@
+@startuml
+
+interface BuilderInterface{
+    + createVehicle()
+    + addWheel()
+    + addEngine()
+    + addDoors()
+    + getVehicle() <<Vehicle>>
+}
+
+class TruckBuilder{
+    - truck
+    + addDoors()
+    + addEngine()
+    + addWheel()
+    + createVehicle()
+    + getVehicle() <<Vehicle>>
+}
+BuilderInterface <|.. TruckBuilder
+
+class CarBuilder{
+    - car
+    + addDoors()
+    + addEngine()
+    + addWheel()
+    + createVehicle()
+    + getVehicle() <<Vehicle>>
+
+}
+BuilderInterface <|.. CarBuilder
+
+
+abstract class Vehicle
+{
+    - data
+    + setPart(key, value)
+}
+
+class Car{
+
+}
+Vehicle <|-- Car
+
+class Truck{
+
+}
+Vehicle <|-- Truck
+
+class Door{
+}
+
+class Engine{
+
+}
+
+class Wheel{
+
+}
+
+Vehicle ..> Door
+Vehicle ..> Engine
+Vehicle ..> Wheel
+
+Vehicle <--o BuilderInterface
+class Director{
+    + build(BuilderInterface builder) <<Vehicle>>
+}
+Director o--> BuilderInterface
+
+@enduml
