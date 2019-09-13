@@ -1,0 +1,31 @@
+@startuml
+interface Product{
+    + calculatePrice()
+}
+
+class ShippableProduct{
+    - productPrice
+    - shippingCosts
+
+    + __construct(productPrice,shippingCosts)
+
+   + calculatePrice()
+}
+
+class DigitalProduct{
+    - price
+    + __construct(price)
+    + calculatePrice()
+}
+
+Product <|.. ShippableProduct
+Product <|.. DigitalProduct
+
+class ProductFactory{
+    + {static} SHIPPING_COSTS
+    + createShippableProduct()
+    + createDigitalProduct()
+}
+
+Product <.. ProductFactory
+@enduml
